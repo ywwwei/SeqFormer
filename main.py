@@ -213,7 +213,7 @@ def main(args):
     else:
         optimizer = torch.optim.AdamW(param_dicts, lr=args.lr,
                                       weight_decay=args.weight_decay)
-    lr_scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer, args.lr_drop )
+    lr_scheduler = torch.optim.lr_scheduler.StepLR(optimizer, args.lr_drop)#torch.optim.lr_scheduler.MultiStepLR(optimizer, args.lr_drop )
 
     if args.distributed:
         model = torch.nn.parallel.DistributedDataParallel(model, device_ids=[args.gpu], find_unused_parameters=True)
